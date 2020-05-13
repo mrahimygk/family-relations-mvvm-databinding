@@ -10,7 +10,8 @@ fun handleError(e: Throwable): Int {
     return when (e) {
         is ApiException -> {
             when (e.statusCode) {
-                INTERNAL_SERVER_ERROR -> R.string.network_error
+                INTERNAL_SERVER_ERROR -> R.string.server_error
+                NETWORK_ERROR -> R.string.network_error
                 else -> R.string.unknown_error
             }
         }
