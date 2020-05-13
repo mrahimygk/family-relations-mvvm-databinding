@@ -7,7 +7,7 @@ import ir.mrahimy.family.modules.adapterModule
 import ir.mrahimy.family.modules.modelModule
 import ir.mrahimy.family.modules.networkModule
 import ir.mrahimy.family.modules.viewModelModule
-import ir.mrahimy.family.network.ConnectionLiveData
+import ir.mrahimy.family.network.util.ConnectionLiveData
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -38,8 +38,10 @@ class FamilyAppController : Application() {
         startKoin {
             androidContext(this@FamilyAppController)
             androidLogger(Level.DEBUG)
-            modules(viewModelModule, modelModule, adapterModule,
-            networkModule)
+            modules(
+                viewModelModule, modelModule, adapterModule,
+                networkModule
+            )
         }
     }
 }
