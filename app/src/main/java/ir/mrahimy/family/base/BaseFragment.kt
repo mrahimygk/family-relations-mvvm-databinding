@@ -12,9 +12,10 @@ import androidx.navigation.fragment.findNavController
 import ir.mrahimy.family.R
 import ir.mrahimy.family.util.EventObserver
 import ir.mrahimy.family.util.NavigationCommand
-import ir.mrahimy.family.util.sharedAnnotation
 import ir.mrahimy.family.util.SharedAnnotation
 import ir.mrahimy.family.util.ktx.navigateUpOrFinish
+import ir.mrahimy.family.util.ktx.showSnackBar
+import ir.mrahimy.family.util.sharedAnnotation
 
 /**
  * Base abstract class which is the parent of every fragment in this project.
@@ -59,8 +60,22 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         super.onCreateView(inflater, container, savedInstanceState)
         init(inflater, container)
         initBinding()
+        bindParentObservables()
         bindObservables()
         return binding?.root ?: View(context)
+    }
+
+    /**
+     * Observing on events that is needed by every free fragment in Westeros.
+     */
+    private fun bindParentObservables() {
+        viewModel.snackMessage.observe(viewLifecycleOwner, EventObserver {
+            view?.showSnackBar(it)
+        })
+
+        viewModel.snackMessageString.observe(viewLifecycleOwner, EventObserver {
+            view?.showSnackBar(it)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
