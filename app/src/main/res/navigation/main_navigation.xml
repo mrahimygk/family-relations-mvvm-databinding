@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_people_list">
         <action
             android:id="@+id/action_people_list_to_inferred_data"
-            app:destination="@id/inferred_data"
+            app:destination="@id/family_relations"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/inferred_data"
-        android:name="ir.mrahimy.family.ui.family.inferred.InferredFragment"
+        android:id="@+id/family_relations"
+        android:name="ir.mrahimy.family.ui.family.relations.FamilyRelationsFragment"
         tools:layout="@layout/activity_family" />
 </navigation>
