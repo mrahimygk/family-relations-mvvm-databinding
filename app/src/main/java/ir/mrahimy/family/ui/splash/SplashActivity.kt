@@ -8,8 +8,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SplashActivity : BaseActivity<SplashViewModel, ActivitySplashBinding>() {
     override val viewModel: SplashViewModel by viewModel()
     override val layoutRes = R.layout.activity_splash
-
-    override val navigationId: Int = R.id.splash_navigation
+    override val navigationId: Int = R.id.navigation_fragment
 
     override fun configEvents() {
 //        TODO("Not yet implemented")
