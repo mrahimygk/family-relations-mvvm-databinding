@@ -10,7 +10,7 @@ import ir.mrahimy.family.util.Event
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class GreetingViewModel(model: GreetingModel) : BaseViewModel(model) {
+class GreetingViewModel(private val model: GreetingModel) : BaseViewModel(model) {
 
     private val _greeting = MutableLiveData(model.randomGreeting())
     val greeting: LiveData<Greeting>
@@ -35,9 +35,25 @@ class GreetingViewModel(model: GreetingModel) : BaseViewModel(model) {
                 })
             }
         }
+
+        viewModelScope.launch {
+            delay(3000)
+            checkDestination()
+        }
     }
 
     fun onGreetingClick(greeting: Greeting) {
         _snackMessageString.postValue(Event(greeting.title))
+    }
+
+    /**
+     * not really checking destination as we do not have the logic of login/register->main app
+     */
+    private fun checkDestination() {
+        navigateToWithFinish(
+            GreetingFragmentDirections.actionGreetingToFamily(
+                _greetingList.value?.last() ?: model.randomGreeting()
+            )
+        )
     }
 }
