@@ -1,5 +1,6 @@
 package ir.mrahimy.family.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
@@ -19,7 +20,7 @@ abstract class BaseViewModel(private val model: BaseModel) : ViewModel() {
 
     /** Used in situations when we need to navigate to another fragment/activity
      */
-    val navigationCommand =  MutableLiveData<Event<NavigationCommand>>()
+    val navigationCommand = MutableLiveData<Event<NavigationCommand>>()
 
     /**
      *      getting directions from the navigation's built actions
@@ -71,5 +72,13 @@ abstract class BaseViewModel(private val model: BaseModel) : ViewModel() {
     fun navigateBackTo(destinationId: Int, inclusive: Boolean) {
         navigationCommand.postValue(Event(NavigationCommand.BackTo(destinationId, inclusive)))
     }
+
+    protected val _snackMessage = MutableLiveData<Event<Int>>()
+    val snackMessage: LiveData<Event<Int>>
+        get() = _snackMessage
+
+    protected val _snackMessageString = MutableLiveData<Event<String>>()
+    val snackMessageString: LiveData<Event<String>>
+        get() = _snackMessageString
 
 }
