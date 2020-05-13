@@ -1,7 +1,8 @@
-package ir.mrahimy.family
+package ir.mrahimy.family.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ir.mrahimy.family.R
 
 class MainActivity : AppCompatActivity() {
 
