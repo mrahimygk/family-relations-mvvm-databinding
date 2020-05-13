@@ -17,7 +17,7 @@ class GreetingAdapter : BaseAdapter<Greeting>(DIFF_CALLBACK) {
             }
 
             override fun areItemsTheSame(oldItem: Greeting, newItem: Greeting): Boolean {
-                return oldItem.title == newItem.title
+                return oldItem.id == newItem.id
             }
         }
     }
