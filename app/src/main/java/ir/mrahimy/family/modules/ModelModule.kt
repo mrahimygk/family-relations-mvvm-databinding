@@ -10,7 +10,7 @@ import org.koin.dsl.module
 val modelModule = module {
     factory { SplashModel() }
     factory { GreetingModel() }
-    factory { PeopleListModel() }
+    factory { PeopleListModel(get()) }
     factory { FamilyModel() }
     factory { FamilyRelationsModel() }
 }
