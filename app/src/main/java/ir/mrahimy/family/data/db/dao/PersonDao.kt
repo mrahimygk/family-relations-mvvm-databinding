@@ -1,5 +1,6 @@
 package ir.mrahimy.family.data.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Query
 import ir.mrahimy.family.data.pojo.Person
@@ -11,5 +12,5 @@ interface PersonDao : BaseDao<Person> {
      * Plural of person is people, not persons
      */
     @Query("SELECT * FROM people")
-    suspend fun getAll()
+    fun getAll(): LiveData<List<Person>>
 }
