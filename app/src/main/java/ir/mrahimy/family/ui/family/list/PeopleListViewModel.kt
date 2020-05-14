@@ -118,4 +118,11 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
     fun showRelations() {
         navigateTo(PeopleListFragmentDirections.actionPeopleListToInferredData())
     }
+
+    /**
+     * if data is loading, we prevent back pressing
+     */
+    fun onBackPress(): Boolean {
+        return _isLoadingPeopleList.value?.not() ?: true
+    }
 }
