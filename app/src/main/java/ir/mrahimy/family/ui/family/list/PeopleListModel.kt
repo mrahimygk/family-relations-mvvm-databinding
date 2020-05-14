@@ -7,5 +7,7 @@ class PeopleListModel(private val peopleRepository: PeopleRepository) : BaseMode
 
     fun getAll() = peopleRepository.getAllFromLocalDb()
 
+    fun getInferredRelations() = peopleRepository.getInferredRelations()
+
     suspend fun syncPeople() = peopleRepository.sync()
 }
