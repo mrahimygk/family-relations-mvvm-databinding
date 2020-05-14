@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="ir.mrahimy.family.ui.family.list.PeopleListViewModel" />
@@ -11,16 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/greetings_recyclerview"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-        <!--            app:data="@{vm.greetingList}"-->
-        <!--            android:layout_marginBottom="48dp"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/splash_text"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            tools:listitem="@layout/item_greeting" />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="48dp"
+            app:data="@{vm.peopleList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_person" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
