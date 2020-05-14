@@ -23,4 +23,6 @@ class PeopleRepositoryImpl(
 
 
     override fun getAllFromLocalDb() = dao.getAll()
+
+    override fun getInferredRelations() = dao.inferRelations()
 }

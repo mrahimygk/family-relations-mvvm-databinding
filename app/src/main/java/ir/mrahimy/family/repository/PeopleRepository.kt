@@ -8,4 +8,5 @@ interface PeopleRepository {
     suspend fun getAll(): ApiResult<List<Person>>
     suspend fun sync(): ApiResult<List<Person>>
     fun getAllFromLocalDb(): LiveData<List<Person>>
+    fun getInferredRelations(): LiveData<List<String>>
 }
