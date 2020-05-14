@@ -10,4 +10,6 @@
     <string name="max_try_please_check">تلاش ناموفق برای دسترسی به سرویس.</string>
     <string name="retry">تلاش دوباره</string>
     <string name="show_relations">نمایش ارتباط‌ها</string>
+    <string name="people_list">فهرست اسامی</string>
+    <string name="family_relations">ارتباط خانوادگی افراد</string>
 </resources>

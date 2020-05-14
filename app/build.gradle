@@ -104,4 +104,8 @@ dependencies {
 
     // Debugging
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //Localization
+    implementation "com.github.YarikSOffice:lingver:1.3.0"
+
 }

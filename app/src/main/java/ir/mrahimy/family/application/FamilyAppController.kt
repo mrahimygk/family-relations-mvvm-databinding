@@ -2,6 +2,7 @@ package ir.mrahimy.family.application
 
 import android.app.Activity
 import android.app.Application
+import com.yariksoffice.lingver.Lingver
 import ir.mrahimy.family.BuildConfig
 import ir.mrahimy.family.modules.*
 import ir.mrahimy.family.network.util.ConnectionLiveData
@@ -10,6 +11,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import timber.log.Timber
+import java.util.*
 
 /**
  * Custom application class
@@ -28,6 +30,8 @@ class FamilyAppController : Application() {
 
         //Network Connectivity
         ConnectionLiveData.init(this)
+
+        Lingver.init(this, Locale("FA", "IR"))
 
         /**
          * all injection modules should be added here as a koin module.

@@ -1,9 +1,12 @@
 package ir.mrahimy.family.ui.family
 
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.navigation.navArgs
 import ir.mrahimy.family.R
 import ir.mrahimy.family.base.BaseActivity
 import ir.mrahimy.family.databinding.ActivityFamilyBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FamilyActivity : BaseActivity<FamilyViewModel, ActivityFamilyBinding>() {
@@ -17,6 +20,16 @@ class FamilyActivity : BaseActivity<FamilyViewModel, ActivityFamilyBinding>() {
          * setting activity title by the input nav args
          */
         title = args.greeting.title
+        updateTitle()
+    }
+
+    private fun updateTitle() {
+        val navController = Navigation.findNavController(this, navigationId)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            lifecycleScope.launch {
+                title = destination.label
+            }
+        }
     }
 
     override fun bindObservables() {

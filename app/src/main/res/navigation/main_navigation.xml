@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/people_list"
         android:name="ir.mrahimy.family.ui.family.list.PeopleListFragment"
-        android:label="@string/app_name"
+        android:label="@string/people_list"
         tools:layout="@layout/fragment_people_list">
         <action
             android:id="@+id/action_people_list_to_inferred_data"
@@ -19,6 +19,7 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
+        android:label="@string/family_relations"
         android:id="@+id/family_relations"
         android:name="ir.mrahimy.family.ui.family.relations.FamilyRelationsFragment"
         tools:layout="@layout/activity_family" />
