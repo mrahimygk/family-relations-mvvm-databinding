@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import ir.mrahimy.family.R
 import ir.mrahimy.family.application.AppTheme
 import ir.mrahimy.family.application.FamilyAppController
-import ir.mrahimy.family.network.ConnectionLiveData
+import ir.mrahimy.family.network.util.ConnectionLiveData
 import ir.mrahimy.family.util.EventObserver
 import ir.mrahimy.family.util.NavigationCommand
 import ir.mrahimy.family.util.interfaces.BackPressListenerFragment
