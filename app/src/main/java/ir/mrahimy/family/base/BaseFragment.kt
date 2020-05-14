@@ -70,12 +70,24 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
      */
     private fun bindParentObservables() {
         viewModel.snackMessage.observe(viewLifecycleOwner, EventObserver {
-            view?.showSnackBar(it)
+            view?.showSnackBar(
+                it.message,
+                duration = it.duration,
+                action = it.action?.let { action -> Pair(action.title, action.action) }
+            )
         })
 
         viewModel.snackMessageString.observe(viewLifecycleOwner, EventObserver {
-            view?.showSnackBar(it)
+            view?.showSnackBar(
+                it.message,
+                duration = it.duration,
+                action = it.action?.let { action -> Pair(action.title, action.action) }
+            )
         })
+    }
+
+    fun dome() {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
