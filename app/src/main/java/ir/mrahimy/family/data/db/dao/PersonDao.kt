@@ -15,7 +15,7 @@ interface PersonDao : BaseDao<Person> {
     fun getAll(): LiveData<List<Person>>
 
     /**
-     * Plural of person is people, not persons
+     * I wanted to get relations by sql query but it is late.
      */
     @Query("SELECT firstName FROM people")
     fun inferRelations(): LiveData<List<String>>
