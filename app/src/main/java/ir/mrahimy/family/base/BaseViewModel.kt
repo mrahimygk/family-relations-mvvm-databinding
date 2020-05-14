@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
+import ir.mrahimy.family.data.pojo.SnackMessage
+import ir.mrahimy.family.data.pojo.SnackMessageString
 import ir.mrahimy.family.util.Event
 import ir.mrahimy.family.util.NavigationCommand
 
@@ -73,12 +75,18 @@ abstract class BaseViewModel(private val model: BaseModel) : ViewModel() {
         navigationCommand.postValue(Event(NavigationCommand.BackTo(destinationId, inclusive)))
     }
 
-    protected val _snackMessage = MutableLiveData<Event<Int>>()
-    val snackMessage: LiveData<Event<Int>>
+    /**
+     * We need to be able to pass an action from TheViewModel to [BaseViewModel]
+     * and then to [BaseFragment].
+     */
+    protected val _snackMessage =
+        MutableLiveData<Event<SnackMessage>>()
+    val snackMessage: LiveData<Event<SnackMessage>>
         get() = _snackMessage
 
-    protected val _snackMessageString = MutableLiveData<Event<String>>()
-    val snackMessageString: LiveData<Event<String>>
+    protected val _snackMessageString =
+        MutableLiveData<Event<SnackMessageString>>()
+    val snackMessageString: LiveData<Event<SnackMessageString>>
         get() = _snackMessageString
 
 }
