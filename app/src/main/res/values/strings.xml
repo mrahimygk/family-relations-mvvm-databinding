@@ -7,6 +7,6 @@
     <string name="unknown_error">خطای ناشناخته</string>
     <string name="internet_not_available">اینترنت متصل نیست</string>
     <string name="network_error">خطا در شبکه</string>
-    <string name="max_try_please_check">سه بار تلاش برای دسترسی به سرویس ناموفق بود.</string>
-    <string name="retry">دوباره</string>
+    <string name="max_try_please_check">تلاش ناموفق برای دسترسی به سرویس.</string>
+    <string name="retry">تلاش دوباره</string>
 </resources>
