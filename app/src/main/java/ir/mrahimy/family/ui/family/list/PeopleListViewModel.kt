@@ -43,7 +43,8 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
             val relationsList = mutableListOf<PersonRelations>()
             peopleList.forEach { personOne ->
                 val personOneRelations = mutableListOf<Person>()
-                peopleList.forEach { personTwo ->
+                peopleList.forEach inner@{ personTwo ->
+                    if (personOne == personTwo) return@inner
                     val haveSameFamilyName = personTwo.lastName == personOne.lastName
                     val isPartOfOtherFamilyName =
                         personTwo.lastName.contains(personOne.lastName) || personOne.lastName.contains(
