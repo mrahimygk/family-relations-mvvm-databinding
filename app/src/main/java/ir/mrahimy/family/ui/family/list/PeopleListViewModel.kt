@@ -7,12 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
 import ir.mrahimy.family.R
 import ir.mrahimy.family.base.BaseViewModel
-import ir.mrahimy.family.data.pojo.Person
-import ir.mrahimy.family.data.pojo.SnackMessageAction
-import ir.mrahimy.family.data.pojo.SnackMessage
-import ir.mrahimy.family.data.pojo.fillData
+import ir.mrahimy.family.data.pojo.*
 import ir.mrahimy.family.network.ApiResult
 import ir.mrahimy.family.util.Event
+import ir.mrahimy.family.util.Shared
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -25,6 +23,48 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
     val peopleList: LiveData<List<Person>> = model.getAll().map { list ->
         list.map { it.fillData() }
     }
+
+    /**
+     * getting inferred list by db query. This is in the exact Karaf's code challenge requirements
+     */
+    val inferredList: MutableLiveData<List<String>> =
+        model.getInferredRelations().map { it } as MutableLiveData<List<String>>
+
+    /**
+     * points.zip(points.leftShift(1)) { a, b ->
+    Pair(Vector2(a.bounds.x, a.bounds.y), Vector2(b.bounds.x, b.bounds.y))
+    }
+     */
+    @Shared("inferredPeopleRelations")
+    val inferredPeopleRelations: MutableLiveData<List<PersonRelations>> =
+        peopleList.map { peopleList ->
+
+
+            val relationsList = mutableListOf<PersonRelations>()
+            peopleList.forEach { personOne ->
+                val personOneRelations = mutableListOf<Person>()
+                peopleList.forEach { personTwo ->
+                    val haveSameFamilyName = personTwo.lastName == personOne.lastName
+                    val isPartOfOtherFamilyName =
+                        personTwo.lastName.contains(personOne.lastName) || personOne.lastName.contains(
+                            personTwo.lastName
+                        )
+                    val haveSharedPart =
+                        personOne.lastName.split("-").intersect(personTwo.lastName.split("-"))
+                            .isNotEmpty()
+                    if (haveSameFamilyName || isPartOfOtherFamilyName || haveSharedPart) {
+                        personOneRelations.add(personTwo)
+                    }
+                }
+                relationsList.add(PersonRelations(personOne, personOneRelations).fillText())
+            }
+
+
+
+
+            relationsList.toList()
+
+        } as MutableLiveData<List<PersonRelations>>
 
     private val _isLoadingPeopleList = MutableLiveData<Boolean>(false)
     val isLoadingPeopleList: LiveData<Boolean>
@@ -72,5 +112,9 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
             is ApiResult.Success -> _isLoadingPeopleList.postValue(false)
 
         }
+    }
+
+    fun showRelations() {
+        navigateTo(PeopleListFragmentDirections.actionPeopleListToInferredData())
     }
 }
