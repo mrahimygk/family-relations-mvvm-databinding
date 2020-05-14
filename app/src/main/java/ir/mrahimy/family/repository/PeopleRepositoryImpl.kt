@@ -14,13 +14,13 @@ class PeopleRepositoryImpl(
         return@safeApiCall ApiResult.Success(api.getPeople(mapOf()))
     }
 
-    override suspend fun sync() {
+    override suspend fun sync() =
         safeApiCall {
             val data = api.getPeople(mapOf())
             dao.insert(data)
             return@safeApiCall ApiResult.Success(data)
         }
-    }
+
 
     override fun getAllFromLocalDb() = dao.getAll()
 }

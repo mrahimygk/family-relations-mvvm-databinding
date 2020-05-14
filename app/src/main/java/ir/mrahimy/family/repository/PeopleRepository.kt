@@ -6,6 +6,6 @@ import ir.mrahimy.family.network.ApiResult
 
 interface PeopleRepository {
     suspend fun getAll(): ApiResult<List<Person>>
-    suspend fun sync()
+    suspend fun sync(): ApiResult<List<Person>>
     fun getAllFromLocalDb(): LiveData<List<Person>>
 }
