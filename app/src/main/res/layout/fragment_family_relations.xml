@@ -18,26 +18,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/greetings_recyclerview"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            app:data="@{vm.greetingList}"-->
-<!--            android:layout_marginBottom="48dp"-->
-<!--            app:layout_constraintBottom_toTopOf="@id/splash_text"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:listitem="@layout/item_greeting" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/splash_text"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{vm.splashText}"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintLeft_toLeftOf="parent"-->
-<!--            app:layout_constraintRight_toRightOf="parent"-->
-<!--            android:layout_marginBottom="128dp"/>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/people_relations_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            app:data="@{vm.inferredPeopleRelations}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_person_relations" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
