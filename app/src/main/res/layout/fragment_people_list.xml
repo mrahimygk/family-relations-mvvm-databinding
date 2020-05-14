@@ -30,10 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:isVisible="@{vm.isLoadingPeopleList}"
-            app:layout_constraintEnd_toEndOf="@id/people_recyclerview"
             app:layout_constraintBottom_toBottomOf="@id/people_recyclerview"
+            app:layout_constraintEnd_toEndOf="@id/people_recyclerview"
             app:layout_constraintStart_toStartOf="@id/people_recyclerview"
             app:layout_constraintTop_toTopOf="@id/people_recyclerview" />
+
+        <Button
+            android:id="@+id/show_relations_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{()->vm.showRelations()}"
+            android:text="@string/show_relations"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
