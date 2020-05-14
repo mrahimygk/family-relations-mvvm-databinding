@@ -13,4 +13,10 @@ interface PersonDao : BaseDao<Person> {
      */
     @Query("SELECT * FROM people")
     fun getAll(): LiveData<List<Person>>
+
+    /**
+     * Plural of person is people, not persons
+     */
+    @Query("SELECT firstName FROM people")
+    fun inferRelations(): LiveData<List<String>>
 }
