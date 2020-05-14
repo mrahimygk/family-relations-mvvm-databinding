@@ -119,10 +119,26 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
         navigateTo(PeopleListFragmentDirections.actionPeopleListToInferredData())
     }
 
-    /**
-     * if data is loading, we prevent back pressing
-     */
+
+    private val mustExit = MutableLiveData<Boolean>().apply { value = false }
     fun onBackPress(): Boolean {
-        return _isLoadingPeopleList.value?.not() ?: true
+        /**
+         * if data is loading, we prevent back pressing
+         */
+        if (_isLoadingPeopleList.value == true) {
+            return false
+        }
+
+        if (mustExit.value == true) {
+            return true
+        }
+        mustExit.postValue(true)
+        _snackMessage.postValue(Event(SnackMessage(R.string.press_back_button_again_to_exit)))
+        viewModelScope.launch {
+            delay(1666)
+            mustExit.postValue(false)
+        }
+        return false
     }
+
 }

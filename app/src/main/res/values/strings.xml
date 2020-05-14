@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Family</string>
+    <string name="app_name">سوال ۲</string>
     <string name="dark">تاریک</string>
     <string name="light">روشن</string>
     <string name="splash_text">در حال معطل کردن کاربر در جهت شوآف …</string>
@@ -12,4 +12,5 @@
     <string name="show_relations">نمایش ارتباط‌ها</string>
     <string name="people_list">فهرست اسامی</string>
     <string name="family_relations">ارتباط خانوادگی افراد</string>
+    <string name="press_back_button_again_to_exit">برای خروج از برنامه دوباره دکمه بازگشت را بزنید</string>
 </resources>
