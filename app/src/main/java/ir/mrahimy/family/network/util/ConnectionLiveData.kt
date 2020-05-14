@@ -1,4 +1,4 @@
-package ir.mrahimy.family.network
+package ir.mrahimy.family.network.util
 
 import android.annotation.TargetApi
 import android.content.BroadcastReceiver
@@ -37,7 +37,9 @@ object ConnectionLiveData : LiveData<ConnectivityModel>() {
         super.onActive()
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ->
-                connectivityManager.registerDefaultNetworkCallback(getConnectivityManagerCallback())
+                connectivityManager.registerDefaultNetworkCallback(
+                    getConnectivityManagerCallback()
+                )
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP -> lollipopNetworkAvailableRequest()
             else -> throw  RuntimeException("We do not support sdk < LOLLIPOP")
         }
@@ -47,9 +49,13 @@ object ConnectionLiveData : LiveData<ConnectivityModel>() {
         super.onInactive()
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                connectivityManager.unregisterNetworkCallback(connectivityManagerCallback)
+                connectivityManager.unregisterNetworkCallback(
+                    connectivityManagerCallback
+                )
             } else {
-                appContext.unregisterReceiver(networkReceiver)
+                appContext.unregisterReceiver(
+                    networkReceiver
+                )
             }
         } catch (e: Exception) {
 
@@ -75,11 +81,21 @@ object ConnectionLiveData : LiveData<ConnectivityModel>() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             connectivityManagerCallback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network?) {
-                    postValue(ConnectivityModel(1, true))
+                    postValue(
+                        ConnectivityModel(
+                            1,
+                            true
+                        )
+                    )
                 }
 
                 override fun onLost(network: Network?) {
-                    postValue(ConnectivityModel(1, false))
+                    postValue(
+                        ConnectivityModel(
+                            1,
+                            false
+                        )
+                    )
                 }
             }
             return connectivityManagerCallback
