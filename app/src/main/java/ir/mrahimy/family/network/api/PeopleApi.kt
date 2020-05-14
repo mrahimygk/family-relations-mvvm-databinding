@@ -1,6 +1,6 @@
 package ir.mrahimy.family.network.api
 
-import android.app.Person
+import ir.mrahimy.family.data.pojo.Person
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
