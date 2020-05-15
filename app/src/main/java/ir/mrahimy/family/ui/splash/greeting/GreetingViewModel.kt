@@ -38,7 +38,7 @@ class GreetingViewModel(private val model: GreetingModel) : BaseViewModel(model)
         }
 
         viewModelScope.launch {
-            delay(3000)
+            delay(1666)
             checkDestination()
         }
     }
