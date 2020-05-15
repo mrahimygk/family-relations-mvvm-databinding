@@ -2,7 +2,7 @@
     <string name="app_name">سوال ۲</string>
     <string name="dark">تاریک</string>
     <string name="light">روشن</string>
-    <string name="splash_text">در حال معطل کردن کاربر در جهت شوآف …</string>
+    <string name="splash_text">در حال معطل کردن کاربر …</string>
     <string name="server_error">خطا در سرور</string>
     <string name="unknown_error">خطای ناشناخته</string>
     <string name="internet_not_available">اینترنت متصل نیست</string>
