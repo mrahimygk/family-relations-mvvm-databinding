@@ -10,12 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import ir.mrahimy.family.R
-import ir.mrahimy.family.util.EventObserver
-import ir.mrahimy.family.util.NavigationCommand
-import ir.mrahimy.family.util.SharedAnnotation
+import ir.mrahimy.family.util.*
 import ir.mrahimy.family.util.ktx.navigateUpOrFinish
 import ir.mrahimy.family.util.ktx.showSnackBar
-import ir.mrahimy.family.util.sharedAnnotation
 
 /**
  * Base abstract class which is the parent of every fragment in this project.
@@ -69,20 +66,37 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
      * Observing on events that is needed by every free fragment in Westeros.
      */
     private fun bindParentObservables() {
-        viewModel.snackMessage.observe(viewLifecycleOwner, EventObserver {
-            view?.showSnackBar(
-                it.message,
-                duration = it.duration,
-                action = it.action?.let { action -> Pair(action.title, action.action) }
-            )
-        })
+        viewModel.snackMessageCommand.observe(viewLifecycleOwner, EventObserver { command ->
+            when (command) {
+                is SnackCommand.StringResSnackCommand ->
+                    view?.showSnackBar(
+                        command.message,
+                        duration = command.duration
+                    )
 
-        viewModel.snackMessageString.observe(viewLifecycleOwner, EventObserver {
-            view?.showSnackBar(
-                it.message,
-                duration = it.duration,
-                action = it.action?.let { action -> Pair(action.title, action.action) }
-            )
+                is SnackCommand.StringSnackCommand ->
+                    view?.showSnackBar(
+                        command.message,
+                        duration = command.duration
+                    )
+
+
+                is SnackCommand.ActionedStringSnackCommand -> {
+                    view?.showSnackBar(
+                        command.message,
+                        duration = command.duration,
+                        action = command.action.paired()
+                    )
+                }
+
+                is SnackCommand.ActionedStringResSnackCommand -> {
+                    view?.showSnackBar(
+                        command.message,
+                        duration = command.duration,
+                        action = command.action.paired()
+                    )
+                }
+            }
         })
     }
 
