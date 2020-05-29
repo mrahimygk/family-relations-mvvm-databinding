@@ -9,7 +9,6 @@ import ir.mrahimy.family.R
 import ir.mrahimy.family.base.BaseViewModel
 import ir.mrahimy.family.data.pojo.*
 import ir.mrahimy.family.network.ApiResult
-import ir.mrahimy.family.util.Event
 import ir.mrahimy.family.util.Shared
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,8 +37,6 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
     @Shared("inferredPeopleRelations")
     val inferredPeopleRelations: MutableLiveData<List<PersonRelations>> =
         peopleList.map { peopleList ->
-
-
             val relationsList = mutableListOf<PersonRelations>()
             peopleList.forEach { personOne ->
                 val personOneRelations = mutableListOf<Person>()
@@ -59,9 +56,6 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
                 }
                 relationsList.add(PersonRelations(personOne, personOneRelations).fillText())
             }
-
-
-
 
             relationsList.toList()
 
@@ -84,19 +78,18 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
     private suspend fun syncPeople(tryCount: Int) {
         _isLoadingPeopleList.postValue(true)
         if (tryCount > 3) {
-            val snackMessageCapsule = SnackMessage(
+            showSnackMessage(
                 R.string.max_try_please_check,
                 Snackbar.LENGTH_INDEFINITE,
                 SnackMessageAction(R.string.retry) {
                     viewModelScope.launch {
                         syncPeople(1)
                     }
-                }
-            )
-            _snackMessage.postValue(Event(snackMessageCapsule))
+                })
             _isLoadingPeopleList.postValue(false)
             return
         }
+
         when (val result = model.syncPeople()) {
             is ApiResult.Error -> {
                 /**
@@ -119,7 +112,6 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
         navigateTo(PeopleListFragmentDirections.actionPeopleListToInferredData())
     }
 
-
     private val mustExit = MutableLiveData<Boolean>().apply { value = false }
     fun onBackPress(): Boolean {
         /**
@@ -133,12 +125,11 @@ class PeopleListViewModel(private val model: PeopleListModel) : BaseViewModel(mo
             return true
         }
         mustExit.postValue(true)
-        _snackMessage.postValue(Event(SnackMessage(R.string.press_back_button_again_to_exit)))
+        showSnackMessage(R.string.press_back_button_again_to_exit)
         viewModelScope.launch {
             delay(1666)
             mustExit.postValue(false)
         }
         return false
     }
-
 }

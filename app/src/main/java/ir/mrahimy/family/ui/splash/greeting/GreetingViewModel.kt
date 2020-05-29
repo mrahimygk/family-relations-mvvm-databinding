@@ -6,8 +6,6 @@ import androidx.lifecycle.viewModelScope
 import ir.mrahimy.family.R
 import ir.mrahimy.family.base.BaseViewModel
 import ir.mrahimy.family.data.pojo.Greeting
-import ir.mrahimy.family.data.pojo.SnackMessageString
-import ir.mrahimy.family.util.Event
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -44,8 +42,7 @@ class GreetingViewModel(private val model: GreetingModel) : BaseViewModel(model)
     }
 
     fun onGreetingClick(greeting: Greeting) {
-        val snackMessageCapsule = SnackMessageString(greeting.title)
-        _snackMessageString.postValue(Event(snackMessageCapsule))
+        showSnackMessage(greeting.title)
     }
 
     /**
