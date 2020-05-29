@@ -1,13 +1,14 @@
 package ir.mrahimy.family.base
 
-import androidx.lifecycle.LiveData
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import ir.mrahimy.family.data.pojo.SnackMessage
-import ir.mrahimy.family.data.pojo.SnackMessageString
+import com.google.android.material.snackbar.Snackbar
+import ir.mrahimy.family.data.pojo.SnackMessageAction
 import ir.mrahimy.family.util.Event
 import ir.mrahimy.family.util.NavigationCommand
+import ir.mrahimy.family.util.SnackCommand
 
 /**
  * Base abstract class which is the parent of every ViewModel in this project.
@@ -79,14 +80,52 @@ abstract class BaseViewModel(private val model: BaseModel) : ViewModel() {
      * We need to be able to pass an action from TheViewModel to [BaseViewModel]
      * and then to [BaseFragment].
      */
-    protected val _snackMessage =
-        MutableLiveData<Event<SnackMessage>>()
-    val snackMessage: LiveData<Event<SnackMessage>>
-        get() = _snackMessage
+    val snackMessageCommand = MutableLiveData<Event<SnackCommand>>()
 
-    protected val _snackMessageString =
-        MutableLiveData<Event<SnackMessageString>>()
-    val snackMessageString: LiveData<Event<SnackMessageString>>
-        get() = _snackMessageString
+    fun showSnackMessage(@StringRes message: Int, duration: Int = Snackbar.LENGTH_SHORT) {
+        snackMessageCommand.postValue(
+            Event(
+                SnackCommand.StringResSnackCommand(
+                    message,
+                    duration = duration
+                )
+            )
+        )
+    }
 
+    fun showSnackMessage(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
+        snackMessageCommand.postValue(Event(SnackCommand.StringSnackCommand(message)))
+    }
+
+    fun showSnackMessage(
+        message: String,
+        duration: Int = Snackbar.LENGTH_SHORT,
+        action: SnackMessageAction
+    ) {
+        snackMessageCommand.postValue(
+            Event(
+                SnackCommand.ActionedStringSnackCommand(
+                    message,
+                    duration,
+                    action
+                )
+            )
+        )
+    }
+
+    fun showSnackMessage(
+        @StringRes message: Int,
+        duration: Int = Snackbar.LENGTH_SHORT,
+        action: SnackMessageAction
+    ) {
+        snackMessageCommand.postValue(
+            Event(
+                SnackCommand.ActionedStringResSnackCommand(
+                    message,
+                    duration,
+                    action
+                )
+            )
+        )
+    }
 }
