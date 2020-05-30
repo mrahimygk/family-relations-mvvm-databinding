@@ -13,8 +13,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ir.mrahimy.family.BR
 
-abstract class BaseAdapter<T>(diff: DiffUtil.ItemCallback<T>) :
-    ListAdapter<T, BaseAdapter<T>.DataBindingViewHolder>(diff) {
+abstract class BaseAdapter<T>(
+    private var itemSimilarityPredicate: (T, T) -> Boolean,
+    private var contentSimilarityPredicate: (T, T) -> Boolean
+) : ListAdapter<T, BaseAdapter<T>.DataBindingViewHolder>(object : DiffUtil.ItemCallback<T>() {
+    override fun areContentsTheSame(
+        oldItem: T,
+        newItem: T
+    ) = contentSimilarityPredicate.invoke(oldItem, newItem)
+
+    override fun areItemsTheSame(
+        oldItem: T,
+        newItem: T
+    ) = itemSimilarityPredicate.invoke(oldItem, newItem)
+}) {
 
     /**
      * these functions should be assigned inside configEvents() of the activity/fragment
